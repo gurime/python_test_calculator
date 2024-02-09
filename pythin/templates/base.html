@@ -1,0 +1,40 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask App{% endblock %}</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+    <style>
+        body,html{
+            padding: 0;
+margin: 0;
+overflow-x: hidden;
+height: 100%;
+letter-spacing: 1px;
+        }
+
+        li{
+            list-style: none;
+        }
+
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('views.home') }}">Home</a></li>
+            <!-- Add more links for other routes as needed -->
+        </ul>
+    </nav>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

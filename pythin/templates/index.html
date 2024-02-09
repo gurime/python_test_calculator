@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+
+
+{% block content %}
+
+{%block head%}
+<style>
+   form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #1f1818;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    background-color: #f2f2f2;
+    outline: none;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: .3s;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+button:hover {
+    background-color: #45a049;
+} 
+</style> {%endblock%}
+
+
+
+<h1>Welcome to the Home Page!</h1>
+<h2>Mortgage Calculator</h2>
+<form  id="mortgageForm" action="{{ url_for('views.calculate') }}" method="post">
+<label for="principal">Principal Amount:</label>
+<input type="number" name="principal" required>
+        
+<label for="interestRate">Interest Rate (%):</label>
+<input type="number" name="interestRate" step="0.01" required>
+
+<label for="loanTerm">Loan Term (years):</label>
+<input type="number" name="loanTerm" required>
+<input type="hidden" name="monthly_payment" id="monthly_payment" value="{{ monthly_payment }}">
+
+<button type="submit">Calculate</button>
+<button type="button" onclick="resetForm()">Reset</button>
+{% if monthly_payment %}
+<div style="text-align: center;">
+<h3>Monthly Payment Result:</h3>
+<p id="monthlyPaymentResult">{{ monthly_payment }}</p>
+</div>
+{% endif %}
+</form>
+
+
+
+
+<script>
+function resetForm() {
+// Set monthly payment to 0
+document.getElementById("monthly_payment").value = 0;
+// Reset the displayed monthly payment
+document.getElementById("monthlyPaymentResult").innerHTML = '';
+// Reset the form
+document.getElementById("mortgageForm").reset();
+}
+</script>
+{% endblock %}
